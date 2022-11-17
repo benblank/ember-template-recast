@@ -43,6 +43,7 @@
     "ora": "^5.4.0",
     "slash": "^3.0.0",
     "tmp": "^0.2.1",
+    "ts-node": "^10.9.1",
     "workerpool": "^6.1.5"
   },
   "devDependencies": {

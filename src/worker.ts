@@ -1,4 +1,6 @@
 import * as fs from 'fs';
+import * as path from 'path';
+import { register as registerTsNode } from 'ts-node';
 import workerpool from 'workerpool';
 import { transform } from './index';
 import type { TransformPluginBuilder } from './index';
@@ -14,6 +16,10 @@ interface TransformOptions {
 }
 
 async function run(transformPath: string, filePath: string, options: TransformOptions) {
+  if (/\.tsx?$/.test(transformPath)) {
+    registerTsNode({ projectSearchDir: path.dirname(transformPath), transpileOnly: true });
+  }
+
   const module = require(transformPath);
   const plugin: TransformPluginBuilder =
     typeof module.default === 'function' ? module.default : module;
